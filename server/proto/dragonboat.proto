@@ -1,0 +1,222 @@
+syntax = "proto3";
+
+package dragonboat.v1;
+
+option go_package = "github.com/lni/dragonboat/v4/server/proto;dbpb";
+
+import "google/api/annotations.proto";
+
+// DragonboatService exposes the core NodeHost operations over gRPC.
+// A grpc-gateway sidecar provides an identical REST/JSON surface
+// on a separate HTTP listener with no extra handler code.
+service DragonboatService {
+
+  // ─── Data Operations ─────────────────────────────────────────────────────
+
+  // Propose submits a serialised command to the specified Raft shard and
+  // waits for it to be committed and applied (SyncPropose).
+  rpc Propose(ProposeRequest) returns (ProposeResponse) {
+    option (google.api.http) = {
+      post: "/v1/shards/{shard_id}/propose"
+      body: "*"
+    };
+  }
+
+  // Read performs a linearisable read on the specified shard (SyncRead).
+  rpc Read(ReadRequest) returns (ReadResponse) {
+    option (google.api.http) = {
+      post: "/v1/shards/{shard_id}/read"
+      body: "*"
+    };
+  }
+
+  // StaleRead performs a non-linearisable local read (lower latency).
+  rpc StaleRead(ReadRequest) returns (ReadResponse) {
+    option (google.api.http) = {
+      post: "/v1/shards/{shard_id}/stale-read"
+      body: "*"
+    };
+  }
+
+  // ─── Cluster Membership ──────────────────────────────────────────────────
+
+  // GetMembership returns the current membership of a shard.
+  rpc GetMembership(GetMembershipRequest) returns (GetMembershipResponse) {
+    option (google.api.http) = {
+      get: "/v1/shards/{shard_id}/membership"
+    };
+  }
+
+  // AddReplica adds a new voting replica to the shard (SyncRequestAddReplica).
+  rpc AddReplica(AddReplicaRequest) returns (AddReplicaResponse) {
+    option (google.api.http) = {
+      post: "/v1/shards/{shard_id}/replicas"
+      body: "*"
+    };
+  }
+
+  // RemoveReplica removes a replica from the shard (SyncRequestDeleteReplica).
+  rpc RemoveReplica(RemoveReplicaRequest) returns (RemoveReplicaResponse) {
+    option (google.api.http) = {
+      delete: "/v1/shards/{shard_id}/replicas/{replica_id}"
+    };
+  }
+
+  // TransferLeader requests a leadership transfer to another replica.
+  rpc TransferLeader(TransferLeaderRequest) returns (TransferLeaderResponse) {
+    option (google.api.http) = {
+      post: "/v1/shards/{shard_id}/transfer-leader"
+      body: "*"
+    };
+  }
+
+  // ─── Maintenance ─────────────────────────────────────────────────────────
+
+  // RequestSnapshot triggers an immediate snapshot of a shard.
+  rpc RequestSnapshot(SnapshotRequest) returns (SnapshotResponse) {
+    option (google.api.http) = {
+      post: "/v1/shards/{shard_id}/snapshot"
+      body: "*"
+    };
+  }
+
+  // ─── Observability ───────────────────────────────────────────────────────
+
+  // GetNodeHostInfo returns status information for the local NodeHost.
+  rpc GetNodeHostInfo(NodeHostInfoRequest) returns (NodeHostInfoResponse) {
+    option (google.api.http) = {
+      get: "/v1/nodehost"
+    };
+  }
+
+  // GetLeader returns the current leader of the specified shard.
+  rpc GetLeader(GetLeaderRequest) returns (GetLeaderResponse) {
+    option (google.api.http) = {
+      get: "/v1/shards/{shard_id}/leader"
+    };
+  }
+
+  // HealthCheck returns OK when the NodeHost is alive and accepting requests.
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse) {
+    option (google.api.http) = {
+      get: "/healthz"
+    };
+  }
+}
+
+// ─── Message Types ────────────────────────────────────────────────────────────
+
+message ProposeRequest {
+  uint64 shard_id = 1;
+  // command is an opaque byte payload interpreted by the state machine.
+  bytes command = 2;
+  // timeout_ms overrides the server default timeout (0 = use default).
+  uint64 timeout_ms = 3;
+}
+
+message ProposeResponse {
+  // value is the uint64 Result.Value returned by IStateMachine.Update.
+  uint64 value = 1;
+  // data is the optional byte slice returned by IStateMachine.Update.
+  bytes data = 2;
+}
+
+message ReadRequest {
+  uint64 shard_id = 1;
+  // query is an opaque byte payload interpreted by the state machine.
+  bytes query = 2;
+  uint64 timeout_ms = 3;
+}
+
+message ReadResponse {
+  // data is the opaque bytes returned by IStateMachine.Lookup.
+  bytes data = 1;
+}
+
+message GetMembershipRequest {
+  uint64 shard_id = 1;
+}
+
+message GetMembershipResponse {
+  uint64 config_change_id = 1;
+  // nodes maps replica_id -> raft_address for voting replicas.
+  map<uint64, string> nodes = 2;
+  // non_votings maps replica_id -> raft_address for non-voting replicas.
+  map<uint64, string> non_votings = 3;
+  // witnesses maps replica_id -> raft_address for witness replicas.
+  map<uint64, string> witnesses = 4;
+  // removed is the set of replica IDs that have been permanently removed.
+  repeated uint64 removed = 5;
+}
+
+message AddReplicaRequest {
+  uint64 shard_id = 1;
+  uint64 replica_id = 2;
+  // target is the RaftAddress (or NodeHostID when gossip is enabled).
+  string target = 3;
+  uint64 config_change_id = 4;
+  uint64 timeout_ms = 5;
+}
+
+message AddReplicaResponse {}
+
+message RemoveReplicaRequest {
+  uint64 shard_id = 1;
+  uint64 replica_id = 2;
+  uint64 config_change_id = 3;
+  uint64 timeout_ms = 4;
+}
+
+message RemoveReplicaResponse {}
+
+message TransferLeaderRequest {
+  uint64 shard_id = 1;
+  uint64 target_replica_id = 2;
+}
+
+message TransferLeaderResponse {}
+
+message SnapshotRequest {
+  uint64 shard_id = 1;
+  uint64 timeout_ms = 2;
+}
+
+message SnapshotResponse {
+  // snapshot_index is the Raft log index of the captured snapshot.
+  uint64 snapshot_index = 1;
+}
+
+message NodeHostInfoRequest {
+  bool skip_log_info = 1;
+}
+
+message ShardInfo {
+  uint64 shard_id = 1;
+  uint64 replica_id = 2;
+  bool is_leader = 3;
+  uint64 leader_id = 4;
+  map<uint64, string> nodes = 5;
+}
+
+message NodeHostInfoResponse {
+  string node_host_id = 1;
+  string raft_address = 2;
+  repeated ShardInfo shards = 3;
+}
+
+message GetLeaderRequest {
+  uint64 shard_id = 1;
+}
+
+message GetLeaderResponse {
+  uint64 leader_id = 1;
+  uint64 term = 2;
+  bool available = 3;
+}
+
+message HealthCheckRequest {}
+
+message HealthCheckResponse {
+  string status = 1;
+  string node_host_id = 2;
+}

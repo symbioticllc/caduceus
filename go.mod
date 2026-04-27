@@ -2,19 +2,23 @@ module github.com/lni/dragonboat/v4
 
 require (
 	github.com/VictoriaMetrics/metrics v1.18.1
-	github.com/cespare/xxhash/v2 v2.1.2
+	github.com/cespare/xxhash/v2 v2.3.0
 	github.com/cockroachdb/errors v1.9.0
 	github.com/cockroachdb/pebble v0.0.0-20221207173255-0f086d933dac
 	github.com/golang/snappy v0.0.4
-	github.com/google/uuid v1.3.0
+	github.com/google/uuid v1.6.0
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.29.0
 	github.com/hashicorp/memberlist v0.3.1
-	github.com/kr/pretty v0.3.0
+	github.com/kr/pretty v0.3.1
 	github.com/lni/goutils v1.4.0
 	github.com/lni/vfs v0.2.1-0.20220616104132-8852fd867376
 	github.com/pierrec/lz4/v4 v4.1.14
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/exp v0.0.0-20200513190911-00229845015e
-	golang.org/x/sys v0.34.0
+	golang.org/x/sys v0.40.0
+	google.golang.org/genproto/googleapis/api v0.0.0-20260420184626-e10c466a9529
+	google.golang.org/grpc v1.80.0
+	google.golang.org/protobuf v1.36.11
 )
 
 require (
@@ -38,14 +42,15 @@ require (
 	github.com/miekg/dns v1.1.26 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/rogpeppe/go-internal v1.8.1 // indirect
+	github.com/rogpeppe/go-internal v1.9.0 // indirect
 	github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529 // indirect
 	github.com/valyala/fastrand v1.1.0 // indirect
 	github.com/valyala/histogram v1.2.0 // indirect
-	golang.org/x/crypto v0.40.0 // indirect
-	golang.org/x/net v0.41.0 // indirect
-	golang.org/x/sync v0.1.0 // indirect
+	golang.org/x/crypto v0.47.0 // indirect
+	golang.org/x/net v0.49.0 // indirect
+	golang.org/x/text v0.36.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260420184626-e10c466a9529 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-go 1.23.0
+go 1.25.0
