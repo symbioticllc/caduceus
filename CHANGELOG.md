@@ -1,9 +1,12 @@
 ## v4.0 (TBD)
 
-Dragonboat v4.0 is a major release with new features, improvements and API changes.
+Caduceus v4.0 (formerly Dragonboat) is a major release with new features, improvements and API changes.
 
 ### New features
 
+- **Project Rename**: Renamed the project from Dragonboat to Caduceus and updated the module path to `github.com/symbioticllc/caduceus`.
+- Added node management scripts.
+- Added `ProTips.md` documentation for best practices.
 - Experimental Raft Pre-Vote support.
 - Experimental LogDB implementation called tan, it is significantly faster than Key-Value store based approach.
 
