@@ -1,4 +1,4 @@
-# Dragonboat Cluster Operations
+# Caduceus Cluster Operations
 
 ## Overview
 
@@ -111,7 +111,7 @@ dragonboat-server \
   # --initial-members is OMITTED on restart
 ```
 
-Gossip broadcasts the new IP to all other nodes. Dragonboat reconnects automatically within one election timeout.
+Gossip broadcasts the new IP to all other nodes. Caduceus reconnects automatically within one election timeout.
 
 ---
 
