@@ -25,7 +25,7 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	sm "github.com/lni/dragonboat/v4/statemachine"
+	sm "github.com/symbioticllc/caduceus/v4/statemachine"
 )
 
 // RedisConfig holds the connection settings for the Redis backend.

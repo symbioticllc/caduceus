@@ -26,11 +26,11 @@ import (
 	"github.com/lni/goutils/leaktest"
 	"github.com/stretchr/testify/require"
 
-	"github.com/lni/dragonboat/v4/config"
-	"github.com/lni/dragonboat/v4/internal/logdb/kv"
-	"github.com/lni/dragonboat/v4/internal/settings"
-	"github.com/lni/dragonboat/v4/internal/vfs"
-	pb "github.com/lni/dragonboat/v4/raftpb"
+	"github.com/symbioticllc/caduceus/v4/config"
+	"github.com/symbioticllc/caduceus/v4/internal/logdb/kv"
+	"github.com/symbioticllc/caduceus/v4/internal/settings"
+	"github.com/symbioticllc/caduceus/v4/internal/vfs"
+	pb "github.com/symbioticllc/caduceus/v4/raftpb"
 )
 
 func TestKVCanBeCreatedAndClosed(t *testing.T) {

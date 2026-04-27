@@ -114,7 +114,7 @@ Dragonboat v3.1 is a maintenance release with breaking change. All v3.0.x users 
 
 ### Breaking changes
 
-- When upgrading to v3.1.x from v3.0.x, dragonboat requires all streamed or imported snapshots to have been applied. github.com/lni/dragonboat/tools/upgrade310 is provided to check that. See the godoc in github.com/lni/dragonboat/tools/upgrade310 for more details. For users who use NodeHost.RequestSnapshot to export snapshots for backup purposes, we recommend to re-generate all exported snapshots once upgraded to v3.1.
+- When upgrading to v3.1.x from v3.0.x, dragonboat requires all streamed or imported snapshots to have been applied. github.com/symbioticllc/caduceus/tools/upgrade310 is provided to check that. See the godoc in github.com/symbioticllc/caduceus/tools/upgrade310 for more details. For users who use NodeHost.RequestSnapshot to export snapshots for backup purposes, we recommend to re-generate all exported snapshots once upgraded to v3.1.
 
 ## v3.0 (2019-06-21)
 
@@ -138,7 +138,7 @@ Dragonboat v3.0 is a major release with breaking changes. Please make sure to ca
 ### Breaking changes
 
 - The Drummer package has been made invisible from user applications.
-- The statemachine.IStateMachine interface has been upgraded to reflect the fact that not all state machine data is stored in memory ([#46](https://github.com/lni/dragonboat/issues/46)).
+- The statemachine.IStateMachine interface has been upgraded to reflect the fact that not all state machine data is stored in memory ([#46](https://github.com/symbioticllc/caduceus/issues/46)).
 
 ## v2.1 (2019-02-20)
 

@@ -1,14 +1,14 @@
 ![dragonboat](./docs/dragonboat.jpg)
 # Dragonboat - A Multi-Group Raft library in Go / [中文版](README.CHS.md) ##
-[![license](http://img.shields.io/badge/license-Apache2-blue.svg)](https://github.com/lni/dragonboat/blob/master/LICENSE)
-![Build status](https://github.com/lni/dragonboat/workflows/Test/badge.svg?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/lni/dragonboat)](https://goreportcard.com/report/github.com/lni/dragonboat)
-[![codecov](https://codecov.io/gh/lni/dragonboat/branch/master/graph/badge.svg)](https://codecov.io/gh/lni/dragonboat)
-[![Godoc](http://img.shields.io/badge/go-documentation-blue.svg)](https://godoc.org/github.com/lni/dragonboat/v3)
-[![Ask LLM about dragonboat](https://deepwiki.com/badge.svg)](https://deepwiki.com/lni/dragonboat)
+[![license](http://img.shields.io/badge/license-Apache2-blue.svg)](https://github.com/symbioticllc/caduceus/blob/master/LICENSE)
+![Build status](https://github.com/symbioticllc/caduceus/workflows/Test/badge.svg?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/symbioticllc/caduceus)](https://goreportcard.com/report/github.com/symbioticllc/caduceus)
+[![codecov](https://codecov.io/gh/symbioticllc/caduceus/branch/master/graph/badge.svg)](https://codecov.io/gh/symbioticllc/caduceus)
+[![Godoc](http://img.shields.io/badge/go-documentation-blue.svg)](https://godoc.org/github.com/symbioticllc/caduceus/v3)
+[![Ask LLM about dragonboat](https://deepwiki.com/badge.svg)](https://deepwiki.com/symbioticllc/caduceus)
 
 ## News ##
-* 2025-07-17 Added a LLM generated wiki [here](https://deepwiki.com/lni/dragonboat).
+* 2025-07-17 Added a LLM generated wiki [here](https://deepwiki.com/symbioticllc/caduceus).
 * 2022-06-03 We are working towards a v4.0 release which will come with API changes. See [CHANGELOG](CHANGELOG.md) for details. 
 * 2021-01-20 Dragonboat v3.3 has been released, please check [CHANGELOG](CHANGELOG.md) for all changes.
 
@@ -17,7 +17,7 @@ Dragonboat is a high performance multi-group [Raft](https://raft.github.io/) [co
 
 Consensus algorithms such as Raft provides fault-tolerance by alllowing a system continue to operate as long as the majority member servers are available. For example, a Raft shard of 5 servers can make progress even if 2 servers fail. It also appears to clients as a single entity with strong data consistency always provided. All Raft replicas can be used to handle read requests for aggregated read throughput.
 
-Dragonboat handles all technical difficulties associated with Raft to allow users to just focus on their application domains. It is also very easy to use, our step-by-step [examples](https://github.com/lni/dragonboat-example) can help new users to master it in half an hour.
+Dragonboat handles all technical difficulties associated with Raft to allow users to just focus on their application domains. It is also very easy to use, our step-by-step [examples](https://github.com/symbioticllc/caduceus-example) can help new users to master it in half an hour.
 
 ## Features ##
 * Easy to use pure-Go APIs for building Raft based applications
@@ -70,40 +70,40 @@ As visualized below, Stop-the-World pauses caused by Go1.11's GC are sub-millise
 * x86_64/Linux, x86_64/MacOS or ARM64/Linux, Go 1.23 or above.
 
 ## Getting Started ##
-__Master is our unstable branch for development, it is current working towards the v4.0 release. Please use the latest released versions for any production purposes.__ For Dragonboat v3.3.x, please follow the instructions in v3.3.x's [README.md](https://github.com/lni/dragonboat/blob/release-3.3/README.md). 
+__Master is our unstable branch for development, it is current working towards the v4.0 release. Please use the latest released versions for any production purposes.__ For Dragonboat v3.3.x, please follow the instructions in v3.3.x's [README.md](https://github.com/symbioticllc/caduceus/blob/release-3.3/README.md). 
 
 Go 1.17 or above with [Go module](https://github.com/golang/go/wiki/Modules) support is required.
 
 Use the following command to add Dragonboat v3 into your project. 
 
 ```
-go get github.com/lni/dragonboat/v3@latest
+go get github.com/symbioticllc/caduceus/v3@latest
 ```
 
 Or you can use the following command to start using the development version of the Dragonboat, which is current at v4 for its APIs. 
 
 ```
-go get github.com/lni/dragonboat/v4@master
+go get github.com/symbioticllc/caduceus/v4@master
 ```
 
 
 By default, [Pebble](https://github.com/cockroachdb/pebble) is used for storing Raft Logs in Dragonboat. RocksDB and other storage engines are also supported, more info [here](docs/storage.md).
 
-You can also follow our [examples](https://github.com/lni/dragonboat-example) on how to use Dragonboat. 
+You can also follow our [examples](https://github.com/symbioticllc/caduceus-example) on how to use Dragonboat. 
 
 ## Documents ##
-[DeepWiki](https://deepwiki.com/lni/dragonboat) is a LLM generated wiki helping to dive deep into the codebase.
+[DeepWiki](https://deepwiki.com/symbioticllc/caduceus) is a LLM generated wiki helping to dive deep into the codebase.
 
-[FAQ](https://github.com/lni/dragonboat/wiki/FAQ), [docs](https://godoc.org/github.com/lni/dragonboat), step-by-step [examples](https://github.com/lni/dragonboat-example), [DevOps doc](docs/devops.md) and [CHANGELOG](CHANGELOG.md).
+[FAQ](https://github.com/symbioticllc/caduceus/wiki/FAQ), [docs](https://godoc.org/github.com/symbioticllc/caduceus), step-by-step [examples](https://github.com/symbioticllc/caduceus-example), [DevOps doc](docs/devops.md) and [CHANGELOG](CHANGELOG.md).
 
 ## Examples ##
-Dragonboat examples are [here](https://github.com/lni/dragonboat-example).
+Dragonboat examples are [here](https://github.com/symbioticllc/caduceus-example).
 
 ## Status ##
 Dragonboat is production ready.
 
 ## Contributing ##
-For reporting bugs, please open an [issue](https://github.com/lni/dragonboat/issues/new). For contributing improvements or new features, please send in the pull request.
+For reporting bugs, please open an [issue](https://github.com/symbioticllc/caduceus/issues/new). For contributing improvements or new features, please send in the pull request.
 
 ## License ##
 Dragonboat is licensed under the Apache License Version 2.0. See LICENSE for details.

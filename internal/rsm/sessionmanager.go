@@ -17,7 +17,7 @@ package rsm
 import (
 	"io"
 
-	sm "github.com/lni/dragonboat/v4/statemachine"
+	sm "github.com/symbioticllc/caduceus/v4/statemachine"
 )
 
 // SessionManager is the wrapper struct that implements client session related

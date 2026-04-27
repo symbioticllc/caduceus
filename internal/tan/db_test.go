@@ -29,9 +29,9 @@ import (
 	"github.com/lni/vfs"
 	"github.com/stretchr/testify/require"
 
-	"github.com/lni/dragonboat/v4/internal/fileutil"
-	"github.com/lni/dragonboat/v4/raftio"
-	pb "github.com/lni/dragonboat/v4/raftpb"
+	"github.com/symbioticllc/caduceus/v4/internal/fileutil"
+	"github.com/symbioticllc/caduceus/v4/raftio"
+	pb "github.com/symbioticllc/caduceus/v4/raftpb"
 )
 
 func runTanTest(t *testing.T, opts *Options, tf func(t *testing.T, d *db), fs vfs.FS) {

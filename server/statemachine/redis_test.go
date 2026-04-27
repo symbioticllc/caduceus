@@ -21,8 +21,8 @@ import (
 
 	"github.com/alicebob/miniredis/v2"
 
-	"github.com/lni/dragonboat/v4/server/statemachine"
-	sm "github.com/lni/dragonboat/v4/statemachine"
+	"github.com/symbioticllc/caduceus/v4/server/statemachine"
+	sm "github.com/symbioticllc/caduceus/v4/statemachine"
 )
 
 // newTestRedis spins up an in-process Redis and returns a RedisStateMachine

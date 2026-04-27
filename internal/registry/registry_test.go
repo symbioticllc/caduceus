@@ -20,7 +20,7 @@ import (
 	"github.com/lni/goutils/stringutil"
 	"github.com/stretchr/testify/require"
 
-	"github.com/lni/dragonboat/v4/internal/settings"
+	"github.com/symbioticllc/caduceus/v4/internal/settings"
 )
 
 func TestPeerCanBeAdded(t *testing.T) {

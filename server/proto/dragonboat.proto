@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dragonboat.v1;
 
-option go_package = "github.com/lni/dragonboat/v4/server/proto;dbpb";
+option go_package = "github.com/symbioticllc/caduceus/v4/server/proto;dbpb";
 
 import "google/api/annotations.proto";
 

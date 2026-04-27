@@ -1,14 +1,14 @@
 ![dragonboat](./docs/dragonboat.jpg)
 # Dragonboat - Go多组Raft库 #
-[![license](http://img.shields.io/badge/license-Apache2-blue.svg)](https://github.com/lni/dragonboat/blob/master/LICENSE)
-![Build status](https://github.com/lni/dragonboat/workflows/Test/badge.svg?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/lni/dragonboat)](https://goreportcard.com/report/github.com/lni/dragonboat)
-[![codecov](https://codecov.io/gh/lni/dragonboat/branch/master/graph/badge.svg)](https://codecov.io/gh/lni/dragonboat)
-[![Godoc](http://img.shields.io/badge/go-documentation-blue.svg)](https://godoc.org/github.com/lni/dragonboat)
-[![Ask LLM about dragonboat](https://deepwiki.com/badge.svg)](https://deepwiki.com/lni/dragonboat)
+[![license](http://img.shields.io/badge/license-Apache2-blue.svg)](https://github.com/symbioticllc/caduceus/blob/master/LICENSE)
+![Build status](https://github.com/symbioticllc/caduceus/workflows/Test/badge.svg?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/symbioticllc/caduceus)](https://goreportcard.com/report/github.com/symbioticllc/caduceus)
+[![codecov](https://codecov.io/gh/symbioticllc/caduceus/branch/master/graph/badge.svg)](https://codecov.io/gh/symbioticllc/caduceus)
+[![Godoc](http://img.shields.io/badge/go-documentation-blue.svg)](https://godoc.org/github.com/symbioticllc/caduceus)
+[![Ask LLM about dragonboat](https://deepwiki.com/badge.svg)](https://deepwiki.com/symbioticllc/caduceus)
 
 ## 项目新闻 ##
-* 2025-07-17 加入了一个[DeepWiki链接](https://deepwiki.com/lni/dragonboat)
+* 2025-07-17 加入了一个[DeepWiki链接](https://deepwiki.com/symbioticllc/caduceus)
 * 2022-06-03 Dragonboat v4.0 版本正在开发中，master分支已经是v4的API，具体变化请见[CHANGELOG](CHANGELOG.md)。
 * 2021-01-20 Dragonboat v3.3 已发布，请查看[CHANGELOG](CHANGELOG.md)获知所有更新情况。
 
@@ -17,7 +17,7 @@ Dragonboat是一个高性能纯[Go](https://golang.org)语言实现的多组[Raf
 
 Raft这样的共识算法使得只要系统中的多数成员在线便可使得系统持续运行。比如，一个拥有5台服务器的Raft集群中即使有两台服务器故障依旧可以工作。它同时向客户端展现一个单机节点，始终提供强一致保证的数据访存。同时，所有在线的成员节点都可用来提供读操作，从而提供更高的读吞吐总和。
 
-所有Raft相关的技术难点都会由Dragonboat来承担，用户从而可以只关注他们各自的应用领域。Dragonboats[使用十分简便](docs/overview.CHS.md)，详细的[例程](https://github.com/lni/dragonboat-example)可使新用户在半小时内完全掌握它。
+所有Raft相关的技术难点都会由Dragonboat来承担，用户从而可以只关注他们各自的应用领域。Dragonboats[使用十分简便](docs/overview.CHS.md)，详细的[例程](https://github.com/symbioticllc/caduceus-example)可使新用户在半小时内完全掌握它。
 
 ## 功能 ##
 * 便于使用的可构建单组与多组Raft应用的纯Go语言API
@@ -71,38 +71,38 @@ Dragonboat是目前Github网站上最快的开源多组Raft实现。
 * x86_64/Linux, x86_64/MacOS或ARM64/Linux, Go 1.23或更新版本
 
 ## 开始使用 ##
-__Master是用于开发的非稳定branch。生产环境请使用已发布版本__。如您使用v3.3.x版本，请参考v3.3.x版本的[README.CHS.md](https://github.com/lni/dragonboat/blob/release-3.3/README.CHS.md)。
+__Master是用于开发的非稳定branch。生产环境请使用已发布版本__。如您使用v3.3.x版本，请参考v3.3.x版本的[README.CHS.md](https://github.com/symbioticllc/caduceus/blob/release-3.3/README.CHS.md)。
 
 首先请确保Go 1.14或者更新的版本已被安装以获得[Go module](https://github.com/golang/go/wiki/Modules)支持。
 
 使用下列命令将Dragonboat v3稳定版加入您的项目：
 
 ```
-go get github.com/lni/dragonboat/v3@latest
+go get github.com/symbioticllc/caduceus/v3@latest
 ```
 或者使用下列命令将开发中的Dragonboat v4版加入您的项目：
 ```
-go get github.com/lni/dragonboat/v4@master
+go get github.com/symbioticllc/caduceus/v4@master
 ```
 
 [Pebble](https://github.com/cockroachdb/pebble)是默认的用于存储Raft Log的存储引擎。RocksDB与自定义存储引擎的使用方法可参考[这里](docs/storage.CHS.md)。
 
-同时可参考[例程](https://github.com/lni/dragonboat-example)以了解更多Dragonboat使用信息。
+同时可参考[例程](https://github.com/symbioticllc/caduceus-example)以了解更多Dragonboat使用信息。
 
 ## 文档与资料 ##
 
-首先建议您阅读项目的[综述文档](docs/overview.CHS.md)与[运维注意事项](docs/devops.CHS.md)。[DeepWiki](https://deepwiki.com/lni/dragonboat)是一个第三方LLM生成的wiki，能帮助深入了解本项目实现，并回答很多技术问题。
+首先建议您阅读项目的[综述文档](docs/overview.CHS.md)与[运维注意事项](docs/devops.CHS.md)。[DeepWiki](https://deepwiki.com/symbioticllc/caduceus)是一个第三方LLM生成的wiki，能帮助深入了解本项目实现，并回答很多技术问题。
 
-欢迎阅读[godoc文档](https://godoc.org/github.com/lni/dragonboat)，[中文例程](https://github.com/lni/dragonboat-example)，[常见问题](https://github.com/lni/dragonboat/wiki/FAQ)和[CHANGELOG](CHANGELOG.md)。
+欢迎阅读[godoc文档](https://godoc.org/github.com/symbioticllc/caduceus)，[中文例程](https://github.com/symbioticllc/caduceus-example)，[常见问题](https://github.com/symbioticllc/caduceus/wiki/FAQ)和[CHANGELOG](CHANGELOG.md)。
 
 ## 中文例程 ##
-中文例程在[这里](https://github.com/lni/dragonboat-example)。
+中文例程在[这里](https://github.com/symbioticllc/caduceus-example)。
 
 ## 项目状态 ##
 Dragonboat适用于生产环境。
 
 ## 参与 ##
-报告bugs, 请提交一个[issue](https://github.com/lni/dragonboat/issues/new)。参与贡献改进及新功能, 请提交pull request并创建一个[issue](https://github.com/lni/dragonboat/issues/new)以便讨论与进度追踪。
+报告bugs, 请提交一个[issue](https://github.com/symbioticllc/caduceus/issues/new)。参与贡献改进及新功能, 请提交pull request并创建一个[issue](https://github.com/symbioticllc/caduceus/issues/new)以便讨论与进度追踪。
 
 ## 开源许可协议 ##
 本项目以Apache License Version 2.0授权开源，请参考LICENSE文件。

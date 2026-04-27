@@ -52,16 +52,16 @@ import (
 	circuit "github.com/lni/goutils/netutil/rubyist/circuitbreaker"
 	"github.com/lni/goutils/syncutil"
 
-	"github.com/lni/dragonboat/v4/config"
-	"github.com/lni/dragonboat/v4/internal/invariants"
-	"github.com/lni/dragonboat/v4/internal/registry"
-	"github.com/lni/dragonboat/v4/internal/server"
-	"github.com/lni/dragonboat/v4/internal/settings"
-	"github.com/lni/dragonboat/v4/internal/vfs"
-	"github.com/lni/dragonboat/v4/logger"
-	ct "github.com/lni/dragonboat/v4/plugin/chan"
-	"github.com/lni/dragonboat/v4/raftio"
-	pb "github.com/lni/dragonboat/v4/raftpb"
+	"github.com/symbioticllc/caduceus/v4/config"
+	"github.com/symbioticllc/caduceus/v4/internal/invariants"
+	"github.com/symbioticllc/caduceus/v4/internal/registry"
+	"github.com/symbioticllc/caduceus/v4/internal/server"
+	"github.com/symbioticllc/caduceus/v4/internal/settings"
+	"github.com/symbioticllc/caduceus/v4/internal/vfs"
+	"github.com/symbioticllc/caduceus/v4/logger"
+	ct "github.com/symbioticllc/caduceus/v4/plugin/chan"
+	"github.com/symbioticllc/caduceus/v4/raftio"
+	pb "github.com/symbioticllc/caduceus/v4/raftpb"
 )
 
 const (

@@ -25,8 +25,8 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	dragonboat "github.com/lni/dragonboat/v4"
-	dbpb "github.com/lni/dragonboat/v4/server/proto"
+	dragonboat "github.com/symbioticllc/caduceus/v4"
+	dbpb "github.com/symbioticllc/caduceus/v4/server/proto"
 )
 
 const defaultTimeout = 5 * time.Second

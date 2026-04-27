@@ -19,7 +19,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/lni/dragonboat/v4/internal/raft"
+	"github.com/symbioticllc/caduceus/v4/internal/raft"
 )
 
 func getTestShardView() []ShardView {

@@ -21,9 +21,9 @@ import (
 	"math"
 	"testing"
 
-	"github.com/lni/dragonboat/v4/internal/raft"
-	"github.com/lni/dragonboat/v4/internal/vfs"
-	pb "github.com/lni/dragonboat/v4/raftpb"
+	"github.com/symbioticllc/caduceus/v4/internal/raft"
+	"github.com/symbioticllc/caduceus/v4/internal/vfs"
+	pb "github.com/symbioticllc/caduceus/v4/raftpb"
 	"github.com/stretchr/testify/require"
 )
 

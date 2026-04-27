@@ -17,8 +17,8 @@ package server
 import (
 	"testing"
 
-	"github.com/lni/dragonboat/v4/internal/vfs"
-	pb "github.com/lni/dragonboat/v4/raftpb"
+	"github.com/symbioticllc/caduceus/v4/internal/vfs"
+	pb "github.com/symbioticllc/caduceus/v4/raftpb"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

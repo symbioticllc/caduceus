@@ -125,5 +125,5 @@ raftCfg := config.Config{
 ## See Also
 
 - [Operational Runbook](./README.md) — bootstrap, restart, scale-out
-- [`config.Config` godoc](https://pkg.go.dev/github.com/lni/dragonboat/v4/config#Config)
+- [`config.Config` godoc](https://pkg.go.dev/github.com/symbioticllc/caduceus/v4/config#Config)
 - [Raft thesis §3](https://raft.github.io/raft.pdf) — the authoritative source

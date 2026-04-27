@@ -21,8 +21,8 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/lni/dragonboat/v4/client"
-	sm "github.com/lni/dragonboat/v4/statemachine"
+	"github.com/symbioticllc/caduceus/v4/client"
+	sm "github.com/symbioticllc/caduceus/v4/statemachine"
 	"github.com/stretchr/testify/require"
 )
 

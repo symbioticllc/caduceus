@@ -24,7 +24,7 @@ import (
 	"reflect"
 	"testing"
 
-	pb "github.com/lni/dragonboat/v4/raftpb"
+	pb "github.com/symbioticllc/caduceus/v4/raftpb"
 )
 
 func TestLogDBTerm(t *testing.T) {

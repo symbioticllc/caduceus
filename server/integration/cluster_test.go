@@ -32,11 +32,11 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	dragonboat "github.com/lni/dragonboat/v4"
-	"github.com/lni/dragonboat/v4/config"
-	grpcserver "github.com/lni/dragonboat/v4/server/grpc"
-	dbpb "github.com/lni/dragonboat/v4/server/proto"
-	"github.com/lni/dragonboat/v4/server/statemachine"
+	dragonboat "github.com/symbioticllc/caduceus/v4"
+	"github.com/symbioticllc/caduceus/v4/config"
+	grpcserver "github.com/symbioticllc/caduceus/v4/server/grpc"
+	dbpb "github.com/symbioticllc/caduceus/v4/server/proto"
+	"github.com/symbioticllc/caduceus/v4/server/statemachine"
 )
 
 const (

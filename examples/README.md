@@ -1,4 +1,4 @@
 ## Examples ##
 
-Examples are available at [https://github.com/lni/dragonboat-example](https://github.com/lni/dragonboat-example).
+Examples are available at [https://github.com/symbioticllc/caduceus-example](https://github.com/symbioticllc/caduceus-example).
 

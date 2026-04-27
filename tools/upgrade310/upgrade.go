@@ -15,13 +15,13 @@
 package upgrade310
 
 import (
-	"github.com/lni/dragonboat/v4/config"
-	"github.com/lni/dragonboat/v4/internal/logdb"
-	"github.com/lni/dragonboat/v4/internal/rsm"
-	"github.com/lni/dragonboat/v4/internal/server"
-	"github.com/lni/dragonboat/v4/internal/utils"
-	"github.com/lni/dragonboat/v4/raftio"
-	pb "github.com/lni/dragonboat/v4/raftpb"
+	"github.com/symbioticllc/caduceus/v4/config"
+	"github.com/symbioticllc/caduceus/v4/internal/logdb"
+	"github.com/symbioticllc/caduceus/v4/internal/rsm"
+	"github.com/symbioticllc/caduceus/v4/internal/server"
+	"github.com/symbioticllc/caduceus/v4/internal/utils"
+	"github.com/symbioticllc/caduceus/v4/raftio"
+	pb "github.com/symbioticllc/caduceus/v4/raftpb"
 )
 
 var firstError = utils.FirstError

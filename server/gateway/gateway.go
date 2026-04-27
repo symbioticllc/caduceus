@@ -25,7 +25,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	dbpb "github.com/lni/dragonboat/v4/server/proto"
+	dbpb "github.com/symbioticllc/caduceus/v4/server/proto"
 )
 
 // NewHandler creates an http.Handler that proxies REST/JSON requests to the

@@ -25,11 +25,11 @@ import (
 	"github.com/lni/goutils/leaktest"
 	"github.com/stretchr/testify/require"
 
-	"github.com/lni/dragonboat/v4/config"
-	"github.com/lni/dragonboat/v4/internal/fileutil"
-	"github.com/lni/dragonboat/v4/internal/vfs"
-	"github.com/lni/dragonboat/v4/raftio"
-	pb "github.com/lni/dragonboat/v4/raftpb"
+	"github.com/symbioticllc/caduceus/v4/config"
+	"github.com/symbioticllc/caduceus/v4/internal/fileutil"
+	"github.com/symbioticllc/caduceus/v4/internal/vfs"
+	"github.com/symbioticllc/caduceus/v4/raftio"
+	pb "github.com/symbioticllc/caduceus/v4/raftpb"
 )
 
 const (

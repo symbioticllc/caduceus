@@ -29,10 +29,10 @@ import (
 	"github.com/lni/goutils/netutil"
 	"github.com/lni/goutils/syncutil"
 
-	"github.com/lni/dragonboat/v4/config"
-	"github.com/lni/dragonboat/v4/internal/settings"
-	"github.com/lni/dragonboat/v4/raftio"
-	pb "github.com/lni/dragonboat/v4/raftpb"
+	"github.com/symbioticllc/caduceus/v4/config"
+	"github.com/symbioticllc/caduceus/v4/internal/settings"
+	"github.com/symbioticllc/caduceus/v4/raftio"
+	pb "github.com/symbioticllc/caduceus/v4/raftpb"
 )
 
 var (

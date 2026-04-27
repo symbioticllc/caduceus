@@ -33,14 +33,14 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/lni/dragonboat/v4/config"
-	"github.com/lni/dragonboat/v4/internal/registry"
-	"github.com/lni/dragonboat/v4/internal/rsm"
-	"github.com/lni/dragonboat/v4/internal/server"
-	"github.com/lni/dragonboat/v4/internal/settings"
-	"github.com/lni/dragonboat/v4/internal/vfs"
-	"github.com/lni/dragonboat/v4/raftio"
-	"github.com/lni/dragonboat/v4/raftpb"
+	"github.com/symbioticllc/caduceus/v4/config"
+	"github.com/symbioticllc/caduceus/v4/internal/registry"
+	"github.com/symbioticllc/caduceus/v4/internal/rsm"
+	"github.com/symbioticllc/caduceus/v4/internal/server"
+	"github.com/symbioticllc/caduceus/v4/internal/settings"
+	"github.com/symbioticllc/caduceus/v4/internal/vfs"
+	"github.com/symbioticllc/caduceus/v4/raftio"
+	"github.com/symbioticllc/caduceus/v4/raftpb"
 )
 
 var serverAddress = fmt.Sprintf("localhost:%d", getTestPort())

@@ -26,9 +26,9 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/lni/dragonboat/v4/internal/fileutil"
-	"github.com/lni/dragonboat/v4/internal/tests/kvpb"
-	sm "github.com/lni/dragonboat/v4/statemachine"
+	"github.com/symbioticllc/caduceus/v4/internal/fileutil"
+	"github.com/symbioticllc/caduceus/v4/internal/tests/kvpb"
+	sm "github.com/symbioticllc/caduceus/v4/statemachine"
 )
 
 type kvdata struct {

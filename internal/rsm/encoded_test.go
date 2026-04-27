@@ -18,8 +18,8 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/lni/dragonboat/v4/internal/utils/dio"
-	pb "github.com/lni/dragonboat/v4/raftpb"
+	"github.com/symbioticllc/caduceus/v4/internal/utils/dio"
+	pb "github.com/symbioticllc/caduceus/v4/raftpb"
 	"github.com/stretchr/testify/require"
 )
 

@@ -23,7 +23,7 @@ import (
 	"io"
 	"sync"
 
-	sm "github.com/lni/dragonboat/v4/statemachine"
+	sm "github.com/symbioticllc/caduceus/v4/statemachine"
 )
 
 // Op identifies the operation type in a KVCommand.

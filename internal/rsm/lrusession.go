@@ -23,8 +23,8 @@ import (
 
 	"github.com/lni/goutils/cache"
 
-	"github.com/lni/dragonboat/v4/internal/fileutil"
-	"github.com/lni/dragonboat/v4/internal/settings"
+	"github.com/symbioticllc/caduceus/v4/internal/fileutil"
+	"github.com/symbioticllc/caduceus/v4/internal/settings"
 )
 
 const (
