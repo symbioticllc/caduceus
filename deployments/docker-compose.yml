@@ -1,45 +1,39 @@
-# Dragonboat 3-node gossip cluster
+# Dragonboat 3-node gossip cluster — Redis-backed state machine
 #
-# ── How it works ──────────────────────────────────────────────────────────────
-#
-# Each node has:
-#   - A stable NodeHostID (UUID set via DRAGONBOAT_NODE_HOST_ID env var)
-#   - A dynamic RaftAddress (the Docker container IP changes on restart)
-#   - A gossip agent that keeps every node informed of others' current IPs
-#
-# The Raft cluster tolerates losing any 1 of the 3 nodes and continues
-# to make progress. When the failed node restarts, gossip re-advertises
-# its new address and Dragonboat replays missing log entries automatically.
+# Each Dragonboat node has its own local Redis instance (redis1/2/3).
+# Replication is handled by Raft; Redis is the materialized state store.
 #
 # ── Bootstrap (first run) ─────────────────────────────────────────────────────
 #
-#   docker compose up
+#   docker compose up --build
 #
-# ── Simulate a node failure ───────────────────────────────────────────────────
+# ── Verify Redis is receiving writes ─────────────────────────────────────────
 #
-#   docker compose stop node3      # kill one node (quorum = 2 of 3 still alive)
-#
-#   # Writes still work:
+#   # Write via REST
 #   curl -X POST http://localhost:8081/v1/shards/1/propose \
 #        -d '{"command":"eyJvcCI6InNldCIsImtleSI6ImZvbyIsInZhbHVlIjoiYmFyIn0="}'
 #
-#   docker compose start node3     # node auto-rejoins, catches up via log replay
+#   # Confirm in Redis directly
+#   docker exec -it dragonboat-redis1 redis-cli GET "db:1:foo"
+#   # → "bar"
+#
+# ── Simulate a node failure ───────────────────────────────────────────────────
+#
+#   docker compose stop node3 redis3  # kill node + its Redis (quorum = 2/3)
+#   curl -X POST http://localhost:8081/v1/shards/1/propose ...  # still works
+#   docker compose start redis3 node3  # node auto-rejoins; Raft replays state
 #
 # ── Scale out (add node4) ─────────────────────────────────────────────────────
 #
-#   1. docker compose run --rm node4   (see node4 service below, disabled by default)
-#   2. curl -X POST http://localhost:8081/v1/shards/1/replicas \
-#           -d '{"replica_id": 4, "target": "nhid-node4"}'
+#   docker compose --profile scale-out up node4 redis4 -d
+#   curl -X POST http://localhost:8081/v1/shards/1/replicas \
+#        -d '{"replica_id": 4, "target": "nhid-44444444-4444-4444-4444-444444444444"}'
 #
 # ── Notes ─────────────────────────────────────────────────────────────────────
-#  - --initial-members only matters on the very first boot.  Dragonboat
-#    persists bootstrap info in --data-dir; subsequent restarts auto-recover.
-#  - Gossip seeds only need to reach ONE live node.  All other nodes are
-#    discovered transitively via gossip propagation.
-#  - Set DRAGONBOAT_NODE_HOST_ID to a stable UUID per node.  Here we use
-#    pre-defined UUIDs so you can reference them in --initial-members.
-#    In Kubernetes, map a pod's stable ordinal name to a UUID stored in a
-#    ConfigMap or Secret.
+#  - Each node's Redis is NOT shared with other nodes. Sharing would bypass Raft.
+#  - Redis AOF/RDB persistence is disabled. Raft is the source of truth.
+#    On restart Redis is empty; the state machine recovers from a Raft snapshot.
+#  - --initial-members only matters on first boot. Subsequent restarts auto-recover.
 
 version: "3.9"
 
@@ -51,15 +45,43 @@ x-common: &common
   networks:
     - raftnet
 
+x-redis: &redis
+  image: redis:7-alpine
+  restart: on-failure:5
+  networks:
+    - raftnet
+  # AOF and RDB disabled — Raft is the source of truth.
+  command: redis-server --save "" --appendonly no
+
 x-gossip-seeds: &seeds "node1:63002,node2:63002,node3:63002"
 
 services:
+
+  # ── Redis sidecars (one per node) ───────────────────────────────────────────
+  redis1:
+    <<: *redis
+    container_name: dragonboat-redis1
+    ports:
+      - "6379:6379"   # expose for redis-cli / RedisInsight inspection
+
+  redis2:
+    <<: *redis
+    container_name: dragonboat-redis2
+    ports:
+      - "6380:6379"
+
+  redis3:
+    <<: *redis
+    container_name: dragonboat-redis3
+    ports:
+      - "6381:6379"
 
   # ── Node 1 ──────────────────────────────────────────────────────────────────
   node1:
     <<: *common
     hostname: node1
     container_name: dragonboat-node1
+    depends_on: [redis1]
     volumes:
       - node1-data:/data
     ports:
@@ -69,6 +91,7 @@ services:
       DRAGONBOAT_GOSSIP: "true"
       DRAGONBOAT_NODE_HOST_ID: "nhid-11111111-1111-1111-1111-111111111111"
       DRAGONBOAT_GOSSIP_SEEDS: *seeds
+      REDIS_ADDR: "redis1:6379"
     command: >
       --node-id=1
       --shard-id=1
@@ -86,6 +109,7 @@ services:
     <<: *common
     hostname: node2
     container_name: dragonboat-node2
+    depends_on: [redis2]
     volumes:
       - node2-data:/data
     ports:
@@ -95,6 +119,7 @@ services:
       DRAGONBOAT_GOSSIP: "true"
       DRAGONBOAT_NODE_HOST_ID: "nhid-22222222-2222-2222-2222-222222222222"
       DRAGONBOAT_GOSSIP_SEEDS: *seeds
+      REDIS_ADDR: "redis2:6379"
     command: >
       --node-id=2
       --shard-id=1
@@ -112,6 +137,7 @@ services:
     <<: *common
     hostname: node3
     container_name: dragonboat-node3
+    depends_on: [redis3]
     volumes:
       - node3-data:/data
     ports:
@@ -121,6 +147,7 @@ services:
       DRAGONBOAT_GOSSIP: "true"
       DRAGONBOAT_NODE_HOST_ID: "nhid-33333333-3333-3333-3333-333333333333"
       DRAGONBOAT_GOSSIP_SEEDS: *seeds
+      REDIS_ADDR: "redis3:6379"
     command: >
       --node-id=3
       --shard-id=1
@@ -133,16 +160,20 @@ services:
       --rtt-ms=5
       --initial-members=1=nhid-11111111-1111-1111-1111-111111111111,2=nhid-22222222-2222-2222-2222-222222222222,3=nhid-33333333-3333-3333-3333-333333333333
 
-  # ── Node 4 (disabled — scale-out example) ──────────────────────────────────
-  # To add a fourth node:
-  #   docker compose run --rm --service-ports node4
-  #   curl -X POST http://localhost:8081/v1/shards/1/replicas \
-  #        -d '{"replica_id": 4, "target": "nhid-44444444-4444-4444-4444-444444444444"}'
+  # ── Node 4 (disabled — scale-out example) ───────────────────────────────────
+  redis4:
+    <<: *redis
+    container_name: dragonboat-redis4
+    profiles: ["scale-out"]
+    ports:
+      - "6382:6379"
+
   node4:
     <<: *common
     hostname: node4
     container_name: dragonboat-node4
-    profiles: ["scale-out"]   # only starts when explicitly requested
+    profiles: ["scale-out"]
+    depends_on: [redis4]
     volumes:
       - node4-data:/data
     ports:
@@ -152,6 +183,7 @@ services:
       DRAGONBOAT_GOSSIP: "true"
       DRAGONBOAT_NODE_HOST_ID: "nhid-44444444-4444-4444-4444-444444444444"
       DRAGONBOAT_GOSSIP_SEEDS: *seeds
+      REDIS_ADDR: "redis4:6379"
     command: >
       --node-id=4
       --shard-id=1

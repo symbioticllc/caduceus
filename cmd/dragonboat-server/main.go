@@ -84,6 +84,7 @@ import (
 	grpcserver "github.com/lni/dragonboat/v4/server/grpc"
 	dbpb "github.com/lni/dragonboat/v4/server/proto"
 	"github.com/lni/dragonboat/v4/server/statemachine"
+	sm "github.com/lni/dragonboat/v4/statemachine"
 )
 
 func main() {
@@ -110,6 +111,13 @@ func main() {
 		"Comma-separated list of seed gossip addresses (other nodes' --gossip-advertise values).")
 	nodeHostID    := flag.String("node-host-id", os.Getenv("DRAGONBOAT_NODE_HOST_ID"),
 		"Stable NodeHostID UUID for this node. Auto-generated and persisted in data-dir if empty.")
+
+	// ── Storage backend ─────────────────────────────────────────────────────
+	backend      := flag.String("backend", "redis", "State machine storage backend: redis (default) or memory")
+	redisAddr    := flag.String("redis-addr", envOr("REDIS_ADDR", "localhost:6379"), "Redis server address (host:port)")
+	redisPass    := flag.String("redis-password", os.Getenv("REDIS_PASSWORD"), "Redis AUTH password")
+	redisDB      := flag.Int("redis-db", 0, "Redis logical database index")
+	redisPrefix  := flag.String("redis-prefix", "", "Redis key prefix (default: db:{shardID}:)")
 
 	// ── RTT tuning ────────────────────────────────────────────────────────────
 	rttMs := flag.Uint64("rtt-ms", 200, "Estimated average RTT between nodes in milliseconds")
@@ -161,7 +169,23 @@ func main() {
 		WaitReady:       true,
 	}
 
-	if err := nh.StartReplica(initialMembers, *joinCluster, statemachine.NewKVStateMachine, raftCfg); err != nil {
+	// ── Select state machine factory ─────────────────────────────────────────
+	var smFactory sm.CreateStateMachineFunc
+	switch *backend {
+	case "memory":
+		log.Printf("Backend: in-memory (testing only — state lost on restart)")
+		smFactory = statemachine.NewKVStateMachine
+	default: // "redis" and anything else
+		log.Printf("Backend: Redis @ %s  db=%d  prefix=%q", *redisAddr, *redisDB, *redisPrefix)
+		smFactory = statemachine.NewRedisStateMachineFactory(statemachine.RedisConfig{
+			Addr:      *redisAddr,
+			Password:  *redisPass,
+			DB:        *redisDB,
+			KeyPrefix: *redisPrefix,
+		})
+	}
+
+	if err := nh.StartReplica(initialMembers, *joinCluster, smFactory, raftCfg); err != nil {
 		log.Fatalf("failed to start replica: %v", err)
 	}
 	log.Printf("Raft replica started: shard=%d replica=%d", *shardID, *nodeID)

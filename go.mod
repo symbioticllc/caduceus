@@ -2,6 +2,7 @@ module github.com/lni/dragonboat/v4
 
 require (
 	github.com/VictoriaMetrics/metrics v1.18.1
+	github.com/alicebob/miniredis/v2 v2.37.0
 	github.com/cespare/xxhash/v2 v2.3.0
 	github.com/cockroachdb/errors v1.9.0
 	github.com/cockroachdb/pebble v0.0.0-20221207173255-0f086d933dac
@@ -13,6 +14,7 @@ require (
 	github.com/lni/goutils v1.4.0
 	github.com/lni/vfs v0.2.1-0.20220616104132-8852fd867376
 	github.com/pierrec/lz4/v4 v4.1.14
+	github.com/redis/go-redis/v9 v9.18.0
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/exp v0.0.0-20200513190911-00229845015e
 	golang.org/x/sys v0.40.0
@@ -28,6 +30,7 @@ require (
 	github.com/cockroachdb/logtags v0.0.0-20211118104740-dabe8e521a4f // indirect
 	github.com/cockroachdb/redact v1.1.3 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/getsentry/sentry-go v0.12.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/btree v1.0.0 // indirect
@@ -46,6 +49,8 @@ require (
 	github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529 // indirect
 	github.com/valyala/fastrand v1.1.0 // indirect
 	github.com/valyala/histogram v1.2.0 // indirect
+	github.com/yuin/gopher-lua v1.1.1 // indirect
+	go.uber.org/atomic v1.11.0 // indirect
 	golang.org/x/crypto v0.47.0 // indirect
 	golang.org/x/net v0.49.0 // indirect
 	golang.org/x/text v0.36.0 // indirect
