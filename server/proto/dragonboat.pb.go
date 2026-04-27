@@ -1251,7 +1251,7 @@ const file_dragonboat_proto_rawDesc = "" +
 	"\x0fGetNodeHostInfo\x12\".dragonboat.v1.NodeHostInfoRequest\x1a#.dragonboat.v1.NodeHostInfoResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/v1/nodehost\x12t\n" +
 	"\tGetLeader\x12\x1f.dragonboat.v1.GetLeaderRequest\x1a .dragonboat.v1.GetLeaderResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/v1/shards/{shard_id}/leader\x12f\n" +
 	"\vHealthCheck\x12!.dragonboat.v1.HealthCheckRequest\x1a\".dragonboat.v1.HealthCheckResponse\"\x10\x82\xd3\xe4\x93\x02\n" +
-	"\x12\b/healthzB0Z.github.com/symbioticllc/caduceus/v4/server/proto;dbpbb\x06proto3"
+	"\x12\b/healthzB0Z.github.com/lni/dragonboat/v4/server/proto;dbpbb\x06proto3"
 
 var (
 	file_dragonboat_proto_rawDescOnce sync.Once

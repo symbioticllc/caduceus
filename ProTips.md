@@ -29,3 +29,7 @@ Caduceus uses `Pebble` as its default LogDB engine.
 ## 7. Catastrophic Quorum Loss Recovery
 If a 3-node shard loses 2 nodes simultaneously (e.g., a data center burns down), you have lost quorum. Standard Raft cannot recover from this because the remaining node cannot elect itself or commit a ConfigChange to remove the dead nodes.
 **Pro-Tip:** Caduceus provides offline recovery tools. You can use the snapshot and the surviving Raft log to manually reconstruct the state machine, or use the built-in `Repair` utility to forcibly rewrite the Raft configuration and resurrect the shard from the surviving node.
+
+## 8. Always Use Hostnames (DNS) Over Static IPs
+When you configure `RaftAddress` on a `NodeHost` or add a new node via `SyncRequestAddNode`, you are explicitly telling the cluster where that node lives on the network. 
+**Pro-Tip:** Pass a stable DNS hostname (like `caduceus-0.my-service.svc.cluster.local:26000`) instead of a raw IP address (`10.0.0.5:26000`). Caduceus automatically resolves the hostname using standard DNS lookups. If a machine crashes and your infrastructure replaces it with a new machine on a different IP, you won't need to issue a Raft ConfigChange—the cluster will automatically reconnect as soon as the DNS record is updated.
