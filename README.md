@@ -1,4 +1,4 @@
-![dragonboat](./docs/dragonboat.jpg)
+![dragonboat](./#)
 # Dragonboat - A Multi-Group Raft library in Go / [中文版](README.CHS.md) ##
 [![license](http://img.shields.io/badge/license-Apache2-blue.svg)](https://github.com/symbioticllc/caduceus/blob/master/LICENSE)
 ![Build status](https://github.com/symbioticllc/caduceus/workflows/Test/badge.svg?branch=master)
